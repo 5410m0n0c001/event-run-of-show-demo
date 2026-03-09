@@ -820,6 +820,111 @@
             margin-top: 10px;
         }
 
+        /* ─── FLOATING ACTION MENU ─── */
+        .fab-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fab-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        .fab-wrapper.active .fab-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .fab-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            color: var(--gold);
+            border: 1px solid var(--gold-line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .fab-btn:hover {
+            background: var(--paper);
+            transform: scale(1.05);
+        }
+
+        .fab-btn::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 55px;
+            background: var(--ink);
+            color: white;
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s;
+            pointer-events: none;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+        }
+
+        .fab-btn:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .fab-main {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(201, 169, 110, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fab-main i {
+            transition: transform 0.3s;
+        }
+
+        .fab-wrapper.active .fab-main i {
+            transform: rotate(45deg);
+        }
+
+        .fab-main:hover {
+            transform: scale(1.08);
+            background: #b8955d;
+        }
+
         /* ─── MOBILE RESPONSIVE ─── */
         @media(max-width: 850px) {
             header {
@@ -921,6 +1026,17 @@
 
             .footer-stats {
                 gap: 15px;
+            }
+
+            /* Corrección para que el 3D viewer sí se vea en móviles y los tabs también al hacer scroll */
+            .tabs-wrapper {
+                position: relative;
+                top: 0;
+            }
+
+            .fab-wrapper {
+                bottom: 20px;
+                right: 20px;
             }
         }
     </style>
@@ -1430,6 +1546,24 @@
 
     </div><!-- /content-wrapper -->
 
+    <!-- FLOATING ACTION MENU -->
+    <div class="fab-wrapper no-print" id="fabMenu">
+        <div class="fab-options">
+            <a href="https://ejemplo.com/planner" target="_blank" class="fab-btn" data-tooltip="Event Planner Hub">
+                <i class="fa-solid fa-headset"></i>
+            </a>
+            <a href="https://ejemplo.com/website" target="_blank" class="fab-btn" data-tooltip="Sitio Web de la Boda">
+                <i class="fa-solid fa-globe"></i>
+            </a>
+            <button class="fab-btn" onclick="shareDoc()" data-tooltip="Compartir Enlace">
+                <i class="fa-solid fa-share-nodes"></i>
+            </button>
+        </div>
+        <button class="fab-main" onclick="toggleFab()">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
+
     <script>
         // Tab Handling
         function switchTab(index) {
@@ -1473,6 +1607,32 @@
                 }
             });
         }
+
+        // FAB Actions
+        function toggleFab() {
+            document.getElementById('fabMenu').classList.toggle('active');
+        }
+
+        function shareDoc() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Run of Show — Isabella & Alejandro',
+                    text: 'Resumen operativo del evento. Documento confidencial.',
+                    url: window.location.href,
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert("Enlace copiado al portapapeles.");
+            }
+        }
+
+        // Hide FAB on outside click
+        document.addEventListener('click', (e) => {
+            const fab = document.getElementById('fabMenu');
+            if (fab && fab.classList.contains('active') && !fab.contains(e.target)) {
+                fab.classList.remove('active');
+            }
+        });
     </script>
 
 </body>
