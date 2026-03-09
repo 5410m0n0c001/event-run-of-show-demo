@@ -205,6 +205,78 @@
             font-weight: 500;
         }
 
+        /* ─── ADD TO CALENDAR BUTTON ─── */
+        .calendar-dropdown-container {
+            margin-top: 35px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn-calendar {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--ink);
+            border: 1px solid var(--gold);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-calendar:hover {
+            background: var(--gold);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .calendar-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: white;
+            border: 1px solid var(--gold-line);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 10px 0;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .calendar-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .calendar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.85rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: background 0.2s;
+            text-align: left;
+        }
+
+        .calendar-menu a:hover {
+            background: var(--paper);
+            color: var(--gold);
+        }
+
         /* ─── TABS ─── */
         .tabs-wrapper {
             background: var(--glass-bg);
@@ -1079,6 +1151,22 @@
                 <div class="bm"><span class="bm-label">Invitados</span><span class="bm-val">180 personas</span></div>
                 <div class="bm"><span class="bm-label">Coordinadora</span><span class="bm-val">Sofía Vargas</span></div>
             </div>
+
+            <div class="calendar-dropdown-container no-print">
+                <button class="btn-calendar" onclick="toggleCalendarMenu()">
+                    <i class="fa-regular fa-calendar-plus"></i> Guardar la Fecha
+                </button>
+                <div class="calendar-menu" id="calendarMenu">
+                    <a href="#" onclick="addToCalendar('apple'); return false;"><i class="fa-brands fa-apple"></i> Apple
+                        Calendar</a>
+                    <a href="#" onclick="addToCalendar('google'); return false;"><i class="fa-brands fa-google"></i>
+                        Google Calendar</a>
+                    <a href="#" onclick="addToCalendar('outlook'); return false;"><i class="fa-brands fa-microsoft"></i>
+                        Outlook</a>
+                    <a href="#" onclick="addToCalendar('yahoo'); return false;"><i class="fa-brands fa-yahoo"></i>
+                        Yahoo</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1647,7 +1735,63 @@
             if (fab && fab.classList.contains('active') && !fab.contains(e.target)) {
                 fab.classList.remove('active');
             }
+
+            const calMenu = document.getElementById('calendarMenu');
+            const calBtn = document.querySelector('.btn-calendar');
+            if (calMenu && calMenu.classList.contains('active') && !calMenu.contains(e.target) && !calBtn.contains(e.target)) {
+                calMenu.classList.remove('active');
+            }
         });
+
+        // Add to Calendar Logic
+        function toggleCalendarMenu() {
+            document.getElementById('calendarMenu').classList.toggle('active');
+        }
+
+        function addToCalendar(type) {
+            const eventData = {
+                title: 'Boda Isabella & Alejandro',
+                description: 'Acompáñanos a celebrar nuestra boda. Ubicación y detalles en el enlace.\n\nEnlace: ' + window.location.href,
+                location: 'Hacienda Las Flores',
+                start: '20250614T180000',
+                end: '20250615T010000'
+            };
+
+            const title = encodeURIComponent(eventData.title);
+            const details = encodeURIComponent(eventData.description);
+            const location = encodeURIComponent(eventData.location);
+            let url = '';
+
+            if (type === 'google') {
+                url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${eventData.start}/${eventData.end}&details=${details}&location=${location}`;
+                window.open(url, '_blank');
+            } else if (type === 'yahoo') {
+                url = `https://calendar.yahoo.com/?v=60&title=${title}&st=${eventData.start}&et=${eventData.end}&desc=${details}&in_loc=${location}`;
+                window.open(url, '_blank');
+            } else if (type === 'apple' || type === 'outlook') {
+                const icsContent = [
+                    'BEGIN:VCALENDAR',
+                    'VERSION:2.0',
+                    'BEGIN:VEVENT',
+                    `DTSTART:${eventData.start}`,
+                    `DTEND:${eventData.end}`,
+                    `SUMMARY:${eventData.title}`,
+                    `DESCRIPTION:${eventData.description.replace(/\n/g, '\\n')}`,
+                    `LOCATION:${eventData.location}`,
+                    'END:VEVENT',
+                    'END:VCALENDAR'
+                ].join('\n');
+
+                const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.setAttribute('download', 'boda_isabella_alejandro.ics');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            toggleCalendarMenu();
+        }
     </script>
 
 </body>
