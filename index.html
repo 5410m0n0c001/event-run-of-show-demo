@@ -125,7 +125,11 @@
         /* ─── HERO EVENT BANNER WITH BACKGROUND ─── */
         .event-banner {
             position: relative;
-            background: url("hero.png.png") center/cover no-repeat;
+            z-index: 100;
+            /* Ensure dropdown menu shows above tabs */
+            background-image: url("hero.png.png");
+            background-size: cover;
+            background-position: center;
             background-color: #FAF8F4;
             padding: 80px 48px 60px;
             color: var(--ink);
@@ -1115,7 +1119,8 @@
 
             .model-container {
                 height: 400px;
-                margin: 20px 0 40px 0;
+                width: 90%;
+                margin: 20px auto 40px auto;
             }
 
             .fab-wrapper {
