@@ -157,10 +157,7 @@
             position: relative;
             z-index: 100;
             /* Ensure dropdown menu shows above tabs */
-            background-image: url("hero.png");
-            background-size: cover;
-            background-position: center;
-            background-color: #FAF8F4;
+            background: linear-gradient(180deg, rgba(250, 248, 244, 0.3) 0%, rgba(250, 248, 244, 0.85) 100%), url("hero.png") center/cover no-repeat;
             padding: 80px 48px 60px;
             color: var(--ink);
             text-align: center;
@@ -168,17 +165,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-
-        .event-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.9) 100%);
-            z-index: 1;
         }
 
         .banner-content {
