@@ -954,7 +954,8 @@
         .fab-btn::before {
             content: attr(data-tooltip);
             position: absolute;
-            right: 55px;
+            right: 45px;
+            /* Empieza un poco más a la derecha para el efecto slide */
             background: var(--ink);
             color: white;
             font-size: 0.7rem;
@@ -963,15 +964,18 @@
             white-space: nowrap;
             opacity: 0;
             visibility: hidden;
-            transition: 0.2s;
+            transform: translateX(10px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none;
             font-family: 'DM Sans', sans-serif;
             font-weight: 500;
         }
 
-        .fab-btn:hover::before {
+        .fab-wrapper.active .fab-btn::before {
             opacity: 1;
             visibility: visible;
+            right: 55px;
+            transform: translateX(0);
         }
 
         .fab-main {
