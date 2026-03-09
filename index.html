@@ -127,7 +127,7 @@
             position: relative;
             z-index: 100;
             /* Ensure dropdown menu shows above tabs */
-            background-image: url("hero.png.png");
+            background-image: url("hero.png");
             background-size: cover;
             background-position: center;
             background-color: #FAF8F4;
@@ -1119,8 +1119,8 @@
 
             .model-container {
                 height: 400px;
-                width: 80%;
-                /* Even more margin for thumb scrolling */
+                width: 70%;
+                /* Amplio margen en los lados para scroll */
                 margin: 20px auto 40px auto;
             }
 
@@ -1768,17 +1768,24 @@
             const title = encodeURIComponent(eventData.title);
             const details = encodeURIComponent(eventData.description);
             const location = encodeURIComponent(eventData.location);
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const isAndroid = /Android/i.test(navigator.userAgent);
+
             let url = '';
 
             if (type === 'google') {
-                // URLs web standard usually trigger the app natively on iOS/Android if installed
-                url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${eventData.start}/${eventData.end}&details=${details}&location=${location}`;
+                const gUrl = `calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${eventData.start}/${eventData.end}&details=${details}&location=${location}`;
+                if (isAndroid) {
+                    url = `intent://${gUrl}#Intent;scheme=https;package=com.google.android.calendar;end`;
+                } else {
+                    url = `https://${gUrl}`;
+                }
                 window.open(url, '_blank');
             } else if (type === 'yahoo') {
                 url = `https://calendar.yahoo.com/?v=60&title=${title}&st=${eventData.start}&et=${eventData.end}&desc=${details}&in_loc=${location}`;
                 window.open(url, '_blank');
             } else if (type === 'outlook') {
-                // Outlook web calendar composer linking directly to account
+                // Outlook web intent (try to trigger app via native handling of live.com links)
                 url = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${eventData.start}&enddt=${eventData.end}&subject=${title}&body=${details}&location=${location}`;
                 window.open(url, '_blank');
             } else if (type === 'apple') {
@@ -1798,13 +1805,16 @@
                 const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
                 const blobUrl = window.URL.createObjectURL(blob);
 
-                // Using a temporary link to download and trigger the OS handler
-                const link = document.createElement('a');
-                link.href = blobUrl;
-                link.setAttribute('download', 'boda_isabella_alejandro.ics');
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                if (isMobile) {
+                    window.location.href = blobUrl;
+                } else {
+                    const link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.setAttribute('download', 'boda_isabella_alejandro.ics');
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
             }
             toggleCalendarMenu();
         }
