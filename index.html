@@ -125,9 +125,10 @@
         /* ─── HERO EVENT BANNER WITH BACKGROUND ─── */
         .event-banner {
             position: relative;
-            background: url("https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+            background: url("portada.jpg") center/cover no-repeat;
+            background-color: #FAF8F4;
             padding: 80px 48px 60px;
-            color: white;
+            color: var(--ink);
             overflow: hidden;
             text-align: center;
             display: flex;
@@ -143,7 +144,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(180deg, rgba(26, 24, 20, 0.8) 0%, rgba(26, 24, 20, 0.95) 100%);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.9) 100%);
             z-index: 1;
         }
 
@@ -159,14 +160,14 @@
             letter-spacing: 0.2em;
             color: var(--gold);
             margin-bottom: 15px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .banner-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+            color: var(--ink);
             line-height: 1.1;
             margin-bottom: 10px;
         }
@@ -195,13 +196,13 @@
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: rgba(201, 169, 110, 0.8);
+            color: var(--muted);
         }
 
         .bm-val {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 300;
+            color: var(--ink);
+            font-weight: 500;
         }
 
         /* ─── TABS ─── */
