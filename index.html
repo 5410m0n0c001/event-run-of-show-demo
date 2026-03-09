@@ -125,11 +125,10 @@
         /* ─── HERO EVENT BANNER WITH BACKGROUND ─── */
         .event-banner {
             position: relative;
-            background: url("media__1773092796177.jpg") center/cover no-repeat;
+            background: url("hero.png.png") center/cover no-repeat;
             background-color: #FAF8F4;
             padding: 80px 48px 60px;
             color: var(--ink);
-            overflow: hidden;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -1215,7 +1214,7 @@
             </div>
 
             <!-- FASE 1 -->
-            <div class="phase-group" id="phase1">
+            <div class="phase-group collapsed" id="phase1">
                 <div class="phase-divider" onclick="togglePhase('phase1')">
                     <span class="phase-icon">🏗</span>
                     <span class="phase-name">Fase 1 — Preparativos & Montaje</span>
@@ -1309,7 +1308,7 @@
             </div>
 
             <!-- FASE 2 -->
-            <div class="phase-group" id="phase2">
+            <div class="phase-group collapsed" id="phase2">
                 <div class="phase-divider" onclick="togglePhase('phase2')">
                     <span class="phase-icon">📸</span>
                     <span class="phase-name">Fase 2 — First Look & Sesión Pre-Ceremonia</span>
@@ -1347,7 +1346,7 @@
             </div>
 
             <!-- FASE 3 -->
-            <div class="phase-group" id="phase3">
+            <div class="phase-group collapsed" id="phase3">
                 <div class="phase-divider" onclick="togglePhase('phase3')">
                     <span class="phase-icon">🥂</span>
                     <span class="phase-name">Fase 3 — Recepción & Cóctel de Bienvenida</span>
@@ -1398,7 +1397,7 @@
             </div>
 
             <!-- FASE 4 -->
-            <div class="phase-group" id="phase4">
+            <div class="phase-group collapsed" id="phase4">
                 <div class="phase-divider" onclick="togglePhase('phase4')">
                     <span class="phase-icon">💒</span>
                     <span class="phase-name">Fase 4 — Ceremonia Civil & Simbólica</span>
@@ -1450,7 +1449,7 @@
             </div>
 
             <!-- FASE 5, 6, 7 y 8... Para no hacer el archivo excesivamente largo en código estático, se combinan en la vista -->
-            <div class="phase-group" id="phase6">
+            <div class="phase-group collapsed" id="phase6">
                 <div class="phase-divider" onclick="togglePhase('phase6')">
                     <span class="phase-icon">🍽</span>
                     <span class="phase-name">Fases 6 & 7 — Cena y Fiesta</span>
