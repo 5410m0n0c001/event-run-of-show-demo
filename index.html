@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primavera Events Group — Premium Run of Show</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --warm: #F2EBE0;
+            --gold: #C9A96E;
+            --gold-light: #E8D5B0;
+            --gold-dark: #A58348;
+            --blush: #E8C4B8;
+            --sage: #8A9E85;
+            --charcoal: #1C1C1C;
+            --muted: #7A7268;
+            --border: rgba(201, 169, 110, 0.25);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow-sm: 0 4px 20px rgba(201, 169, 110, 0.08);
+            --shadow-lg: 0 20px 40px rgba(28, 28, 28, 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: var(--gold-light);
+            color: var(--charcoal);
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            background: rgba(28, 28, 28, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 12px 40px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+            text-shadow: 0 0 15px rgba(201, 169, 110, 0.4);
+        }
+
+        .logo span { color: #fff; font-style: italic; font-weight: 300; }
+        
+        .event-badge {
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid rgba(201, 169, 110, 0.4);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: var(--gold-light);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        /* ─── EVENT HERO ─── */
+        .event-hero {
+            position: relative;
+            background: var(--charcoal);
+            padding: 80px 40px;
+            color: white;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 50vh;
+        }
+
+        .event-hero-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23C9A96E" fill-opacity="0.08"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            opacity: 0.5;
+            z-index: 1;
+            animation: panBg 40s linear infinite;
+        }
+
+        @keyframes panBg {
+            0% { background-position: 0 0; }
+            100% { background-position: 600px 600px; }
+        }
+
+        /* Placeholder for User's Hero Image */
+        .event-hero-image-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to right, rgba(28, 28, 28, 0.95) 0%, rgba(28, 28, 28, 0.7) 100%),
+                        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            z-index: 0;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            animation: fadeUpIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeUpIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .couple-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300;
+            color: var(--gold-light);
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .couple-names em { font-style: italic; color: var(--blush); font-family: 'Cormorant Garamond', serif; }
+        
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            letter-spacing: 0.05em;
+        }
+
+        .event-meta {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 110, 0.2);
+            padding: 24px 32px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+        }
+
+        .meta-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 10%;
+            height: 80%;
+            width: 1px;
+            background: rgba(201, 169, 110, 0.2);
+        }
+
+        .meta-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        /* ─── TABS ─── */
+        .tabs-wrapper {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 73px;
+            z-index: 900;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .tabs::-webkit-scrollbar { display: none; }
+
+        .tab {
+            padding: 20px 28px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            position: relative;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: 'DM Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tab:hover { color: var(--gold-dark); }
+        
+        .tab.active {
+            color: var(--charcoal);
+        }
+
+        .tab.active::after {
+            transform: scaleX(1);
+        }
+
+        .tab-icon {
+            font-size: 1.1rem;
+            color: var(--gold);
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+        
+        .tab.active .tab-icon { opacity: 1; }
+
+        /* ─── CONTENT AREA ─── */
+        .content {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 60vh;
+        }
+
+        .panel { 
+            display: none; 
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .panel.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── SECTION HEADER ─── */
+        .section-header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin-top: 20px;
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+            font-weight: 300;
+        }
+
+        /* ─── 3D VIEWER CONTAINER ─── */
+        .model-container {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .model-container::before {
+            content: 'Cargando Modelo 3D...';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            z-index: 0;
+            animation: pulseText 1.5s infinite;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* Hide the default background */
+            --poster-color: transparent;
+        }
+
+        /* ─── TIMELINE / RUN OF SHOW ─── */
+        .timeline-container { position: relative; padding-left: 10px; }
+        
+        .timeline-line {
+            position: absolute;
+            left: 120px;
+            top: 20px; 
+            bottom: 20px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--gold) 5%, var(--gold) 95%, transparent);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 90px 40px 1fr;
+            gap: 0;
+            margin-bottom: 30px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .time-col {
+            text-align: right;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+            padding-top: 26px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .dot-col {
+            display: flex;
+            justify-content: center;
+            padding-top: 24px;
+        }
+
+        .dot {
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 0 5px rgba(201, 169, 110, 0.15);
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover .dot {
+            transform: scale(1.3);
+            background: var(--gold);
+            box-shadow: 0 0 15px rgba(201, 169, 110, 0.5);
+        }
+
+        .timeline-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold);
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease;
+        }
+
+        .timeline-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+            border-color: var(--gold);
+        }
+
+        .timeline-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .timeline-card.key-moment {
+            background: linear-gradient(135deg, white 0%, var(--warm) 100%);
+            border-color: var(--gold-light);
+        }
+        
+        .timeline-card.key-moment::before {
+            transform: scaleY(1);
+            background: var(--charcoal);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .activity-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .responsible-badge {
+            font-size: 0.75rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(201,169,110,0.1);
+            color: var(--gold-dark);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .card-notes {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ─── STICKY FAB BUTTON ─── */
+        .fab-wrapper {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .fab-options {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fab-wrapper.active .fab-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .fab-item {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            color: var(--charcoal);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .fab-item:hover {
+            background: var(--gold);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .fab-item::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 100%;
+            margin-right: 15px;
+            background: var(--charcoal);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .fab-item:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .fab-main {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: var(--charcoal);
+            color: var(--gold);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(28,28,28,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: var(--transition);
+            position: relative;
+            z-index: 10;
+        }
+
+        .fab-main:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(28,28,28,0.4);
+            background: #2a2a2a;
+        }
+
+        .fab-main::after {
+            content: '';
+            position: absolute;
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            opacity: 0;
+            animation: pulseFab 2s infinite;
+        }
+
+        @keyframes pulseFab {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .fab-icon {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fab-wrapper.active .fab-icon {
+            transform: rotate(135deg);
+        }
+
+        /* ─── SHARE BUTTON SPECIAL ─── */
+        .btn-share-special {
+            background: #f05a7e !important;
+            border-color: #f05a7e !important;
+            color: white !important;
+        }
+
+        .btn-share-special:hover {
+            background: #d94f6f !important;
+            box-shadow: 0 10px 18px rgba(240,90,126,0.35) !important;
+        }
+
+        /* ─── CHECKLIST / COLLAPSIBLES ─── */
+        .collapse-block {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .collapse-header {
+            padding: 24px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            background: linear-gradient(to right, #ffffff, var(--warm));
+            transition: var(--transition);
+        }
+
+        .collapse-header:hover { background: var(--warm); }
+
+        .collapse-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        .collapse-icon {
+            color: var(--gold);
+            transition: transform 0.3s ease;
+        }
+
+        .collapse-block.active .collapse-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapse-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            background: white;
+        }
+
+        .collapse-block.active .collapse-body {
+            max-height: 1000px;
+            transition: max-height 0.8s ease-in-out;
+        }
+
+        .collapse-content-inner {
+            padding: 24px 30px;
+            border-top: 1px solid rgba(201, 169, 110, 0.1);
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .check-item:hover { padding-left: 10px; color: var(--gold-dark); }
+        .check-item:last-child { border-bottom: none; }
+
+        .checkbox {
+            width: 22px; height: 22px;
+            border: 2px solid var(--gold);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .check-item.done .checkbox {
+            background: var(--gold);
+        }
+
+        .check-item.done .checkbox::before {
+            content: '\f00c';
+            font-family: 'FontAwesome';
+            color: white;
+            font-size: 12px;
+        }
+
+        .check-label { flex: 1; font-size: 0.95rem; }
+
+        .check-item.done .check-label {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .event-hero { padding: 40px 20px; text-align: center; }
+            .meta-item:not(:last-child)::after { display: none; }
+            .event-meta { flex-direction: column; gap: 20px; }
+            .timeline-item { grid-template-columns: 70px 30px 1fr; }
+            .timeline-line { left: 95px; }
+            .card-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<header id="mainHeader">
+    <a href="#" class="logo">
+        <i class="fa-solid fa-seedling"></i>
+        <div><span>Primavera</span> Events Group</div>
+    </a>
+    <div class="event-badge">Sistema Demo — Boda 2025</div>
+</header>
+
+<div class="event-hero">
+    <div class="event-hero-bg"></div>
+    <div class="event-hero-image-overlay"></div>
+    <div class="hero-content">
+        <h1 class="couple-names">Isabella Montoya <em>&</em> Alejandro Reyes</h1>
+        <p class="hero-subtitle">«El amor que florece»</p>
+        <div class="event-meta">
+            <div class="meta-item">
+                <span class="meta-label">Fecha</span>
+                <span class="meta-value">Sábado 14 de Junio, 2025</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Venue</span>
+                <span class="meta-value">Hacienda Las Flores</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Invitados</span>
+                <span class="meta-value">180 personas</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Presupuesto</span>
+                <span class="meta-value">$850,000 MXN</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tabs-wrapper">
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab(0)">
+            <i class="fa-regular fa-clock tab-icon"></i> Run of Show
+        </button>
+        <button class="tab" onclick="switchTab(1)">
+            <i class="fa-solid fa-cube tab-icon"></i> Visualización 3D
+        </button>
+        <button class="tab" onclick="switchTab(2)">
+            <i class="fa-solid fa-list-check tab-icon"></i> Master Checklist
+        </button>
+    </div>
+</div>
+
+<div class="content">
+
+    <!-- PANEL 1: RUN OF SHOW -->
+    <div class="panel active" id="panel-0">
+        <div class="section-header">
+            <h2 class="section-title">Timeline Minuto a Minuto</h2>
+            <p class="section-subtitle">Itinerario detallado del evento · Hacienda Las Flores</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item">
+                <div class="time-col">13:00</div>
+                <div class="dot-col"><div class="dot"></div></div>
+                <div class="timeline-card">
+                    <div class="card-top">
+                        <span class="activity-name">Llegada equipo de montaje & florería</span>
+                        <span class="responsible-badge"><i class="fa-solid fa-truck"></i> Banquete + Florería</span>
+                    </div>
+                    <div class="card-notes">Acceso por puerta trasera. Montar 18 mesas redondas de 10 personas. Centros florales con peonías blancas y eucalipto.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="time-col">18:00</div>
+                <div class="dot-col"><div class="dot"></div></div>
+                <div class="timeline-card">
+                    <div class="card-top">
+                        <span class="activity-name">Llegada de invitados — Cóctel</span>
+                        <span class="responsible-badge"><i class="fa-solid fa-martini-glass"></i> Hostess + Catering</span>
+                    </div>
+                    <div class="card-notes">Recibimiento jardín poniente. Mezcal de bienvenida + agua fresca. Música lounge: Quartet Las Flores.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="time-col">19:00</div>
+                <div class="dot-col"><div class="dot" style="border-color: var(--charcoal); background: var(--charcoal);"></div></div>
+                <div class="timeline-card key-moment">
+                    <div class="card-top">
+                        <span class="activity-name">✨ CEREMONIA CIVIL & SIMBÓLICA</span>
+                        <span class="responsible-badge" style="background: var(--gold); color: white;"><i class="fa-solid fa-ring"></i> Oficialía</span>
+                    </div>
+                    <div class="card-notes">Capilla jardín. Entrada novia: A Thousand Years — Piano solo. Duración estimada 45 min.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="time-col">21:00</div>
+                <div class="dot-col"><div class="dot"></div></div>
+                <div class="timeline-card">
+                    <div class="card-top">
+                        <span class="activity-name">Cena Principal — 3 Tiempos</span>
+                        <span class="responsible-badge"><i class="fa-solid fa-utensils"></i> Girasol Banquetes</span>
+                    </div>
+                    <div class="card-notes">Plato fuerte: Filete mignon o Risotto de hongos. Postre: Panna cotta.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PANEL 2: 3D VIEWER -->
+    <div class="panel" id="panel-1">
+        <div class="section-header">
+            <h2 class="section-title">Visualización 3D del Venue</h2>
+            <p class="section-subtitle">Explora el render interactivo del montaje</p>
+        </div>
+        
+        <div class="model-container">
+            <model-viewer 
+                src="https://raw.githubusercontent.com/5410m0n0c001/layout-antigravity1/main/4.glb"
+                alt="3D Render del Evento"
+                auto-rotate
+                camera-controls
+                shadow-intensity="1"
+                exposure="1.2"
+                environment-image="neutral"
+                interaction-prompt="auto">
+            </model-viewer>
+        </div>
+    </div>
+
+    <!-- PANEL 3: MASTER CHECKLIST -->
+    <div class="panel" id="panel-2">
+        <div class="section-header">
+            <h2 class="section-title">Master Checklist</h2>
+            <p class="section-subtitle">Planificación operativa en bloques colapsables</p>
+        </div>
+
+        <div class="collapse-block active">
+            <div class="collapse-header" onclick="toggleCollapse(this)">
+                <span class="collapse-title">Fase 1: Preparativos Iniciales</span>
+                <i class="fa-solid fa-chevron-down collapse-icon"></i>
+            </div>
+            <div class="collapse-body">
+                <div class="collapse-content-inner">
+                    <div class="check-item done" onclick="this.classList.toggle('done')">
+                        <div class="checkbox"></div>
+                        <span class="check-label">Definir presupuesto general</span>
+                    </div>
+                    <div class="check-item done" onclick="this.classList.toggle('done')">
+                        <div class="checkbox"></div>
+                        <span class="check-label">Reservar venue principal</span>
+                    </div>
+                    <div class="check-item" onclick="this.classList.toggle('done')">
+                        <div class="checkbox"></div>
+                        <span class="check-label">Firmar contrato con Catering</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse-block">
+            <div class="collapse-header" onclick="toggleCollapse(this)">
+                <span class="collapse-title">Fase 2: Coordinación Proveedores</span>
+                <i class="fa-solid fa-chevron-down collapse-icon"></i>
+            </div>
+            <div class="collapse-body">
+                <div class="collapse-content-inner">
+                    <div class="check-item" onclick="this.classList.toggle('done')">
+                        <div class="checkbox"></div>
+                        <span class="check-label">Selección y prueba de menú</span>
+                    </div>
+                    <div class="check-item" onclick="this.classList.toggle('done')">
+                        <div class="checkbox"></div>
+                        <span class="check-label">Diseño floral y centros de mesa</span>
+                    </div>
+                    <div class="check-item" onclick="this.classList.toggle('done')">
+                        <div class="checkbox"></div>
+                        <span class="check-label">Reunión con DJ para playlist</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- STICKY FAB MENU -->
+<div class="fab-wrapper" id="fabWrapper">
+    <div class="fab-options">
+        <button onclick="sharePage()" class="fab-item btn-share-special" data-tooltip="Compartir Run of Show">
+            <i class="fa-solid fa-share-nodes"></i>
+        </button>
+        <a href="https://primaveraeventsgroup.com/richard-hernandez/" target="_blank" class="fab-item" data-tooltip="Event Planner">
+            <i class="fa-solid fa-user-tie"></i>
+        </a>
+        <a href="https://primaveraeventsgroup.com/" target="_blank" class="fab-item" data-tooltip="Sitio Web">
+            <i class="fa-solid fa-globe"></i>
+        </a>
+    </div>
+    <button class="fab-main" id="fabToggle">
+        <i class="fa-solid fa-wand-magic-sparkles fab-icon"></i>
+    </button>
+</div>
+
+<script>
+    // Tab Switching
+    function switchTab(index) {
+        document.querySelectorAll('.tab').forEach((t, i) => {
+            t.classList.toggle('active', i === index);
+        });
+        document.querySelectorAll('.panel').forEach((p, i) => {
+            p.classList.toggle('active', i === index);
+        });
+        
+        // Retrigger animations
+        if(index === 0) triggerTimelineAnimation();
+    }
+
+    // Collapsible Blocks
+    function toggleCollapse(element) {
+        const block = element.parentElement;
+        block.classList.toggle('active');
+    }
+
+    // FAB Menu
+    const fabToggle = document.getElementById('fabToggle');
+    const fabWrapper = document.getElementById('fabWrapper');
+    
+    // Toggle on click
+    fabToggle.addEventListener('click', (e) => {
+        fabWrapper.classList.toggle('active');
+    });
+
+    // Share API
+    function sharePage() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Primavera Events Group - Run of Show',
+                text: 'Descubre lo que Primavera Events Group tiene para ti. Mira esta página interactiva:',
+                url: window.location.href
+            }).then(() => {
+                console.log('Thanks for sharing!');
+            }).catch(console.error);
+        } else {
+            alert('La función de compartir no está soportada en tu navegador actúal, intenta copiar el enlace manualmente.');
+        }
+    }
+
+    // Scroll Effects
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('mainHeader');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Intersection Observer for Timeline Items Animation
+    function triggerTimelineAnimation() {
+        const items = document.querySelectorAll('.timeline-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 150); // Stagger effect
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        items.forEach(item => {
+            item.classList.remove('visible'); // reset
+            observer.observe(item);
+        });
+    }
+
+    // Init animations
+    document.addEventListener('DOMContentLoaded', () => {
+        triggerTimelineAnimation();
+    });
+</script>
+
+</body>
+</html>
