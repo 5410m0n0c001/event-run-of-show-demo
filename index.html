@@ -125,7 +125,7 @@
         /* ─── HERO EVENT BANNER WITH BACKGROUND ─── */
         .event-banner {
             position: relative;
-            background: url("portada.jpg") center/cover no-repeat;
+            background: url("media__1773092796177.jpg") center/cover no-repeat;
             background-color: #FAF8F4;
             padding: 80px 48px 60px;
             color: var(--ink);
@@ -222,6 +222,8 @@
         .tabs {
             display: flex;
             gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
             overflow-x: auto;
             scrollbar-width: none;
         }
@@ -823,8 +825,9 @@
         /* ─── FLOATING ACTION MENU ─── */
         .fab-wrapper {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -1034,8 +1037,15 @@
                 top: 0;
             }
 
+            .tabs {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+
             .fab-wrapper {
+                top: auto;
                 bottom: 20px;
+                transform: none;
                 right: 20px;
             }
         }
@@ -1560,7 +1570,7 @@
             </button>
         </div>
         <button class="fab-main" onclick="toggleFab()">
-            <i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
         </button>
     </div>
 
