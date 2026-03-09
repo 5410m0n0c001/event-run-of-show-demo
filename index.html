@@ -1119,7 +1119,8 @@
 
             .model-container {
                 height: 400px;
-                width: 90%;
+                width: 80%;
+                /* Even more margin for thumb scrolling */
                 margin: 20px auto 40px auto;
             }
 
@@ -1623,7 +1624,8 @@
             <div class="model-container">
                 <model-viewer src="https://raw.githubusercontent.com/5410m0n0c001/layout-antigravity1/main/4.glb"
                     alt="3D Render del Evento" auto-rotate camera-controls shadow-intensity="1" exposure="1.2"
-                    environment-image="neutral" interaction-prompt="auto">
+                    environment-image="neutral" interaction-prompt="auto" min-field-of-view="10deg"
+                    max-field-of-view="180deg" min-camera-orbit="auto auto 1%">
                 </model-viewer>
             </div>
         </div>
@@ -1757,8 +1759,8 @@
                 title: 'Boda Isabella & Alejandro',
                 description: 'Acompáñanos a celebrar nuestra boda. Ubicación y detalles en el enlace.\n\nEnlace: ' + window.location.href,
                 location: 'Hacienda Las Flores',
-                start: '20250614T180000',
-                end: '20250615T010000'
+                start: '20250614T180000Z',
+                end: '20250615T010000Z'
             };
 
             const title = encodeURIComponent(eventData.title);
@@ -1767,12 +1769,17 @@
             let url = '';
 
             if (type === 'google') {
+                // URLs web standard usually trigger the app natively on iOS/Android if installed
                 url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${eventData.start}/${eventData.end}&details=${details}&location=${location}`;
                 window.open(url, '_blank');
             } else if (type === 'yahoo') {
                 url = `https://calendar.yahoo.com/?v=60&title=${title}&st=${eventData.start}&et=${eventData.end}&desc=${details}&in_loc=${location}`;
                 window.open(url, '_blank');
-            } else if (type === 'apple' || type === 'outlook') {
+            } else if (type === 'outlook') {
+                // Outlook web calendar composer linking directly to account
+                url = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${eventData.start}&enddt=${eventData.end}&subject=${title}&body=${details}&location=${location}`;
+                window.open(url, '_blank');
+            } else if (type === 'apple') {
                 const icsContent = [
                     'BEGIN:VCALENDAR',
                     'VERSION:2.0',
@@ -1787,8 +1794,11 @@
                 ].join('\n');
 
                 const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+                const blobUrl = window.URL.createObjectURL(blob);
+
+                // Using a temporary link to download and trigger the OS handler
                 const link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
+                link.href = blobUrl;
                 link.setAttribute('download', 'boda_isabella_alejandro.ics');
                 document.body.appendChild(link);
                 link.click();
